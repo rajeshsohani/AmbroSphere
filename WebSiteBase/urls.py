@@ -11,3 +11,5 @@ urlpatterns = [
     path("summernote/", include("django_summernote.urls")),
     path('', lambda request: redirect('Tutorial/demo/', permanent=True)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  # To serve media files during development
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
