@@ -35,7 +35,7 @@ opt-einsum==3.3.0
 optree==0.12.1
 packaging==24.1
 python_docx 
-pywin32==306
+pywin32
 pillow==10.4.0
 protobuf==4.25.5
 psycopg2-binary==2.9.9
