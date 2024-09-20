@@ -149,3 +149,14 @@ JET_DEFAULT_THEME = 'default'  # Try with the default theme
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
+# settings.py
+
+STATIC_URL = '/static/'
+
+# Ensure you have defined this if you store additional static files in other directories
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+
+# Location where static files will be collected to
+STATIC_ROOT = BASE_DIR / "staticfiles"
