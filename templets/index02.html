@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collapsible Topics and Subtopics</title>
+    <style>
+        /* (Your existing CSS) */
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            {% for subject in subjects %}
+            <li><a href="#" onclick="showContent('{{ subject.name|slugify }}_content')">{{ subject.name }}</a></li>
+            {% endfor %}
+        </ul>
+    </nav>
+
+    <!-- Search Bar -->
+    <input type="text" id="searchBar" placeholder="Search topics or subtopics..." oninput="searchContent()">
+
+    <!-- Dynamic Content for Subjects -->
+    {% for subject in subjects %}
+    <div id="{{ subject.name|slugify }}_content" class="content">
+        <h3>{{ subject.name }} Topics:</h3>
+        {% for topic in subject.topics.all %}
+        <div class="topic" data-topic-name="{{ topic.name }}" onclick="toggleSubtopics('{{ topic.name|slugify }}_subtopics')">{{ topic.name }}</div>
+        <div id="{{ topic.name|slugify }}_subtopics" class="subtopics">
+            {% for subtopic in topic.subtopics.all %}
+            <div class="subtopic" data-subtopic-name="{{ subtopic.name }}" onclick="toggleDescription('{{ subtopic.name|slugify }}_description', '{{ subtopic.content|escapejs }}')">{{ subtopic.name }}</div>
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </div>
+    {% endfor %}
+
+    <!-- Description Section -->
+    <div id="description"></div>
+
+    <script>
+        let lastOpenedSubtopic = null;  // Stores the last opened subtopic element
+        let lastOpenedDescription = null;  // Stores the last opened description content
+
+        // Function to show content for the clicked subject
+        function showContent(contentId) {
+            var contents = document.querySelectorAll('.content');
+            contents.forEach(function(content) {
+                content.style.display = 'none';
+            });
+
+            var content = document.getElementById(contentId);
+            content.style.display = 'block';
+
+            resetPage(); // Reset the page when switching tabs
+        }
+
+        // Function to show or hide subtopics when a topic is clicked
+        function toggleSubtopics(subtopicId) {
+            var subtopics = document.getElementById(subtopicId);
+
+            // Toggle subtopics visibility
+            if (subtopics.style.display === "none" || subtopics.style.display === "") {
+                subtopics.style.display = "block";
+            } else {
+                subtopics.style.display = "none";
+            }
+        }
+
+        // Function to toggle description of subtopic
+        function toggleDescription(subtopicId, description) {
+            var descriptionDiv = document.getElementById('description');
+            var subtopicElement = document.getElementById(subtopicId);
+
+            // If clicking the same subtopic again, hide the description
+            if (lastOpenedDescription === description) {
+                descriptionDiv.innerHTML = '';  // Clear description
+                lastOpenedDescription = null;  // Reset the last opened description
+            } else {
+                descriptionDiv.innerHTML = description;  // Show new description
+                lastOpenedDescription = description;  // Update last opened description
+            }
+
+            // Close the last opened subtopic, if any
+            if (lastOpenedSubtopic && lastOpenedSubtopic !== subtopicElement) {
+                lastOpenedSubtopic.style.display = 'none';
+            }
+
+            // Toggle the subtopic element
+            if (subtopicElement.style.display === "none" || subtopicElement.style.display === "") {
+                subtopicElement.style.display = "block";
+            } else {
+                subtopicElement.style.display = "none";
+            }
+
+            lastOpenedSubtopic = subtopicElement;  // Set current subtopic as last opened
+        }
+
+        // Function to search topics and subtopics
+        function searchContent() {
+            var searchTerm = document.getElementById('searchBar').value.toLowerCase();
+
+            var topics = document.querySelectorAll('.topic');
+            var subtopics = document.querySelectorAll('.subtopic');
+
+            topics.forEach(function(topic) {
+                var topicName = topic.getAttribute('data-topic-name').toLowerCase();
+                var relatedSubtopics = topic.nextElementSibling.querySelectorAll('.subtopic');
+                var isTopicMatch = topicName.includes(searchTerm);
+                var subtopicMatch = false;
+
+                relatedSubtopics.forEach(function(subtopic) {
+                    var subtopicName = subtopic.getAttribute('data-subtopic-name').toLowerCase();
+                    if (subtopicName.includes(searchTerm)) {
+                        subtopic.style.display = 'block';
+                        subtopicMatch = true;
+                    } else {
+                        subtopic.style.display = 'none';
+                    }
+                });
+
+                if (isTopicMatch || subtopicMatch) {
+                    topic.style.display = 'block';
+                    topic.nextElementSibling.style.display = 'block'; // Show subtopics if they match
+                } else {
+                    topic.style.display = 'none';
+                    topic.nextElementSibling.style.display = 'none'; // Hide subtopics if nothing matches
+                }
+            });
+        }
+
+        // Function to reset the page when the user changes the tab
+        function resetPage() {
+            var descriptionDiv = document.getElementById('description');
+            descriptionDiv.innerHTML = '';
+            lastOpenedDescription = null;  // Reset last opened description
+
+            var subtopics = document.querySelectorAll('.subtopics');
+            subtopics.forEach(function(subtopic) {
+                subtopic.style.display = 'none';
+            });
+
+            lastOpenedSubtopic = null;  // Reset last opened subtopic
+        }
+    </script>
+
+</body>
+</html>
