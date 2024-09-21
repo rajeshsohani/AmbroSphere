@@ -79,3 +79,4 @@ numpy==1.26.4
 psycopg2==2.9.9  # Use psycopg2 instead of psycopg2-binary for production
 gunicorn==23.0.0
 requests==2.32.3
+buildcommand:  - pip install --upgrade pip  - pip install -r requirements.txt  - python manage.py collectstatic --noinput
