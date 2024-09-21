@@ -149,3 +149,8 @@ JET_DEFAULT_THEME = 'default'  # Try with the default theme
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
+
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+
