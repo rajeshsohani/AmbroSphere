@@ -8,7 +8,7 @@ urlpatterns = [
 
     path('admin/', admin.site.urls),
     path('Tutorial/', include('Tutorial.urls')),  # Include the `urls.py` of your `Tutorial` app
-    #path("summernote/", include("django_summernote.urls")),
+    path("summernote/", include("django_summernote.urls")),
     path('', lambda request: redirect('Tutorial/demo/', permanent=True)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  # To serve media files during development
 #if settings.DEBUG:
