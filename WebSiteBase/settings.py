@@ -21,11 +21,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-h*uy)p1az5@yer2v%*czb_kddyo*)ox89&n930ae6i*wfv4yf$'
-<<<<<<< HEAD
+
 DEBUG = True
 #ALLOWED_HOSTS = ['ambrosphere.onrender.com']
 ALLOWED_HOSTS=[]
-=======
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -33,16 +33,12 @@ DEBUG = False
 ALLOWED_HOSTS = ['ambrosphere.onrender.com', 'localhost', '127.0.0.1']
 
 
->>>>>>> 5a74f5e6f137ffd222b1d0d8014c0091dd33058f
+
 # Application definition
 
 INSTALLED_APPS = [
-<<<<<<< HEAD
+
     'admin_soft.apps.AdminSoftDashboardConfig',
-=======
-
-
->>>>>>> 5a74f5e6f137ffd222b1d0d8014c0091dd33058f
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
