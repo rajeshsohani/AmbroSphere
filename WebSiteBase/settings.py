@@ -9,10 +9,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Security settings
 SECRET_KEY = 'django-insecure-h*uy)p1az5@yer2v%*czb_kddyo*)ox89&n930ae6i*wfv4yf$'
 DEBUG = True
-ALLOWED_HOSTS = ['ambrosphere.onrender.com']
-
+#ALLOWED_HOSTS = ['ambrosphere.onrender.com']
+ALLOWED_HOSTS=[]
 # Application definition
 INSTALLED_APPS = [
+    'admin_soft.apps.AdminSoftDashboardConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
