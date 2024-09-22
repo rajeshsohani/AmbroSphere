@@ -8,7 +8,7 @@ from django.contrib.auth import views as auth_views
 urlpatterns = [
 
     path('admin/', admin.site.urls),
-    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+    #path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('Tutorial/', include('Tutorial.urls')),  # Include the `urls.py` of your `Tutorial` app
     path("summernote/", include("django_summernote.urls")),
     path('', lambda request: redirect('Tutorial/demo/', permanent=True)),
