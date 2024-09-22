@@ -8,25 +8,25 @@ from django.db import models
 
 
 class SubjectAdmin(admin.ModelAdmin):
-   # formfield_overrides = {
-  #      models.TextField: {'widget': SummernoteWidget},
- #   }
+    formfield_overrides = {
+        models.TextField: {'widget': SummernoteWidget},
+    }
 
 admin.site.register(SubjectModel,SubjectAdmin)
 
 
 
 class TopicAdmin(admin.ModelAdmin):
-    #formfield_overrides = {
-     #   models.TextField: {'widget': SummernoteWidget},
-    #}
+    formfield_overrides = {
+        models.TextField: {'widget': SummernoteWidget},
+    }
 admin.site.register(TopicModel,TopicAdmin)
 
 
 class SubtopiAdmin(admin.ModelAdmin):
-    #formfield_overrides = {
-     #   models.TextField: {'widget': SummernoteWidget},
-    #}
+    formfield_overrides = {
+        models.TextField: {'widget': SummernoteWidget},
+    }
 
 admin.site.register(SubtopicModel,SubtopiAdmin)
 
