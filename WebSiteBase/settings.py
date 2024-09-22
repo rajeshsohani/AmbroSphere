@@ -22,9 +22,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-h*uy)p1az5@yer2v%*czb_kddyo*)ox89&n930ae6i*wfv4yf$'
 
-DEBUG = True
-#ALLOWED_HOSTS = ['ambrosphere.onrender.com']
-ALLOWED_HOSTS=[]
+DEBUG = False
+ALLOWED_HOSTS = ['ambrosphere.onrender.com']
+#ALLOWED_HOSTS=[]
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
